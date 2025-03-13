@@ -1,7 +1,14 @@
 <script setup>
-import {ref} from 'vue';
+import {ref, defineProps} from 'vue';
 const tasks = ref(['t1', 't2', 't3']);
 const newTask = ref("");
+
+defineProps({
+  dayName: {
+    type: String,
+    default: 'Day Box'
+  }
+});
 
 const addTask = () => {
   if(newTask.value.trim() !== '') {
@@ -19,7 +26,7 @@ const deleteTask = (index) => {
   <!-- <p>Day Box</p> -->
   <div class="day-box">
   <form @submit.prevent="addTask">
-    <p class="day-name">Day Name</p>
+    <p class="day-name">{{ dayName }}</p>
     <label for="newTask">Add Task</label>
     <input type="text" name="newTask" id="newTask" v-model="newTask">
     <button type="submit">Submit</button>
@@ -45,9 +52,12 @@ const deleteTask = (index) => {
   border-radius: 20px;
   border-color: black;
   margin: 10px;
+  font-size: 20px;
 }
 
 .day-name {
-  font-size: 20px;
+  font-size: 30px;
+  margin: 10px;
+  text-align: center;
 }
 </style>

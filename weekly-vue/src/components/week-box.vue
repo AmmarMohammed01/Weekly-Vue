@@ -5,13 +5,14 @@ import DayBox from "./day-box.vue";
 <template>
   <p>Week Box</p>
   <div class="week-box">
-    <DayBox/>
-    <DayBox/>
-    <DayBox/>
-    <DayBox/>
-    <DayBox/>
-    <DayBox/>
-    <DayBox/>
+    <DayBox dayName="Sunday"/>
+    <DayBox dayName="Monday"/>
+    <DayBox dayName="Tuesday"/>
+    <DayBox dayName="Wedensday"/>
+    <DayBox dayName="Thursday"/>
+    <DayBox dayName="Friday"/>
+    <DayBox dayName="Saturday"/>
+    
   </div>
 </template>
 
