@@ -1,10 +1,10 @@
 <script setup>
-import WeekBox from "./components/week-box.vue";
+import {RouterView} from 'vue-router';
 </script>
 
 <template>
   <p>Weekly</p>
-  <WeekBox/>
+  <RouterView />
 </template>
 
 <style scoped>
