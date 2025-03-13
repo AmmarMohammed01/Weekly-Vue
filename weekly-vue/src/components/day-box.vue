@@ -1,18 +1,19 @@
 <script setup>
-import {ref, defineProps} from 'vue';
-const tasks = ref(['t1', 't2', 't3']);
-const newTask = ref("");
+import {ref, defineProps, watch} from 'vue';
 
-defineProps({
+const props = defineProps({
   dayName: {
     type: String,
     default: 'Day Box'
   }
 });
 
+const tasks = ref(JSON.parse(localStorage.getItem(`tasks-${props.dayName}`)) || []);
+const newTask = ref("");
+
 const addTask = () => {
   if(newTask.value.trim() !== '') {
-    tasks.value.push(newTask.value);
+    tasks.value.push({taskDay: props.dayName, taskName: newTask.value });
     newTask.value = '';
   }
 }
@@ -20,6 +21,10 @@ const addTask = () => {
 const deleteTask = (index) => {
   tasks.value.splice(index, 1);
 }
+
+watch(tasks, () => {
+  localStorage.setItem(`tasks-${props.dayName}`, JSON.stringify(tasks.value));
+}, {deep: true});
 </script>
 
 <template>
@@ -34,8 +39,10 @@ const deleteTask = (index) => {
 
   <ul>
     <li v-for="(task, index) in tasks" :key="task">
+
+      <!-- v-if="task.taskDay == dayName" -->
       <span>
-        {{ task }}
+        {{ task.taskName }}
       </span>
       <button @click="deleteTask(index)">x</button>
     </li>
