@@ -9,7 +9,10 @@ const props = defineProps({
 });
 
 const tasks = ref(JSON.parse(localStorage.getItem(`tasks-${props.dayName}`)) || []);
-const newTask = ref("");
+const newTask = ref(""); //for task input field
+
+const editModeIndex = ref(-1); //contains index of task being editted, otherwise -1
+const editTaskName = ref(""); //contains edit task input field
 
 //task object structure
 const addTask = () => {
@@ -31,7 +34,22 @@ const deleteTask = (index) => {
 const completeTask = (index) => {
   // console.log((tasks.value)[index].taskCompletion);
   (tasks.value)[index].taskCompletion = !((tasks.value)[index].taskCompletion);
-  console.log(`Switched task completion to ${(tasks.value)[index].taskCompletion}`);
+  //console.log(`Switched task completion to ${(tasks.value)[index].taskCompletion}`);
+};
+
+const editModeOpen = (index) => {
+  editModeIndex.value = index;
+  editTaskName.value = (tasks.value)[index].taskName;
+};
+
+const editModeExit = () => {
+  editModeIndex.value = -1;
+};
+
+const editModeSave = (index) => {
+  (tasks.value)[index].taskName = editTaskName.value;
+  editTaskName.value = ""; //maybe unnecessary
+  editModeExit();
 };
 
 watch(tasks, () => {
@@ -40,7 +58,7 @@ watch(tasks, () => {
 </script>
 
 <template>
-  <!-- <p>Day Box</p> -->
+  <!-- Task input field -->
   <div class="day-box">
   <form @submit.prevent="addTask">
     <p class="day-name">{{ dayName }}</p>
@@ -49,12 +67,22 @@ watch(tasks, () => {
     <button type="submit">Submit</button>
   </form>
 
-  <!-- Task box: name, check, delete -->
+  <!-- Display Task: name, edit, check, delete -->
   <ul>
     <li v-for="(task, index) in tasks" :key="task">
-      <span> {{ task.taskName }} </span>
-      <button @click="completeTask(index)" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
-      <button @click="deleteTask(index)">x</button>
+      <!-- Task editor view -->
+      <div v-if="editModeIndex == index">
+        <input type="text" name="editTaskName" id="editTaskName" v-model="editTaskName">
+        <button @click="editModeSave(index)">Save</button>
+        <button @click="editModeExit()">Cancel</button>
+      </div>
+      <!-- Task normal view -->
+      <div v-else>
+        <span> {{ task.taskName }} </span>
+        <button @click="editModeOpen(index)">&#9998;</button>
+        <button @click="completeTask(index)" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
+        <button @click="deleteTask(index)">x</button>
+      </div>
     </li>
   </ul>
 
