@@ -11,16 +11,28 @@ const props = defineProps({
 const tasks = ref(JSON.parse(localStorage.getItem(`tasks-${props.dayName}`)) || []);
 const newTask = ref("");
 
+//task object structure
 const addTask = () => {
   if(newTask.value.trim() !== '') {
-    tasks.value.push({taskDay: props.dayName, taskName: newTask.value });
+    tasks.value.push(
+      {
+        taskDay: props.dayName,
+        taskName: newTask.value,
+        taskCompletion: false 
+      });
     newTask.value = '';
   }
-}
+};
 
 const deleteTask = (index) => {
   tasks.value.splice(index, 1);
-}
+};
+
+const completeTask = (index) => {
+  // console.log((tasks.value)[index].taskCompletion);
+  (tasks.value)[index].taskCompletion = !((tasks.value)[index].taskCompletion);
+  console.log(`Switched task completion to ${(tasks.value)[index].taskCompletion}`);
+};
 
 watch(tasks, () => {
   localStorage.setItem(`tasks-${props.dayName}`, JSON.stringify(tasks.value));
@@ -37,13 +49,12 @@ watch(tasks, () => {
     <button type="submit">Submit</button>
   </form>
 
+  <!-- Task box: name, check, delete -->
   <ul>
     <li v-for="(task, index) in tasks" :key="task">
-
-      <!-- v-if="task.taskDay == dayName" -->
-      <span>
-        {{ task.taskName }}
-      </span>
+      <span> {{ task.taskName }} </span>
+      <button v-if="task.taskCompletion === true" @click="completeTask(index)" style="background-color: rgb(0,255,100); border: solid;">&check;</button>
+      <button v-else @click="completeTask(index)">&check;</button>
       <button @click="deleteTask(index)">x</button>
     </li>
   </ul>
