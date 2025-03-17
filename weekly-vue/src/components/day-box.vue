@@ -53,8 +53,7 @@ watch(tasks, () => {
   <ul>
     <li v-for="(task, index) in tasks" :key="task">
       <span> {{ task.taskName }} </span>
-      <button v-if="task.taskCompletion === true" @click="completeTask(index)" style="background-color: rgb(0,255,100); border: solid;">&check;</button>
-      <button v-else @click="completeTask(index)">&check;</button>
+      <button @click="completeTask(index)" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
       <button @click="deleteTask(index)">x</button>
     </li>
   </ul>
@@ -77,5 +76,9 @@ watch(tasks, () => {
   font-size: 30px;
   margin: 10px;
   text-align: center;
+}
+
+.isTaskComplete {
+  background-color: lime;
 }
 </style>
