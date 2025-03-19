@@ -4,9 +4,16 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <Navbar />
-  <RouterView />
+  <div class="css-format">
+    <Navbar />
+    <RouterView />
+  </div>
+  
 </template>
 
 <style scoped>
+.css-format {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
 </style>

@@ -24,31 +24,35 @@ const editModeSave = () => {
 </script>
 
 <template>
-  <div v-if="isModeEdit == false">
-    <span>{{ title }}</span>
-    <button @click="editModeOpen()">&#9998;</button>
-  </div>
-  <div v-else>
-    <input type="text" v-model="editTitle" name="editTitle" id="editTitle">
-    <button @click="editModeSave()">Save</button>
-    <button @click="editModeClose()">Cancel</button>
-  </div>
-
-  <div class="week-box">
-    <DayBox dayName="Sunday"/>
-    <DayBox dayName="Monday"/>
-    <DayBox dayName="Tuesday"/>
-    <DayBox dayName="Wedensday"/>
-    <DayBox dayName="Thursday"/>
-    <DayBox dayName="Friday"/>
-    <DayBox dayName="Saturday"/>
+  <div>
+    <!-- title -->
+    <div v-if="isModeEdit == false">
+      <span>{{ title }}</span>
+      <button @click="editModeOpen()">&#9998;</button>
+    </div>
+    <div v-else>
+      <input type="text" v-model="editTitle" name="editTitle" id="editTitle">
+      <button @click="editModeSave()">Save</button>
+      <button @click="editModeClose()">Cancel</button>
+    </div>
     
+    <!-- the portion containing day boxes -->
+    <div class="week-box">
+      <DayBox dayName="Sunday"/>
+      <DayBox dayName="Monday"/>
+      <DayBox dayName="Tuesday"/>
+      <DayBox dayName="Wedensday"/>
+      <DayBox dayName="Thursday"/>
+      <DayBox dayName="Friday"/>
+      <DayBox dayName="Saturday"/>
+      
+    </div>
   </div>
 </template>
 
 <style scoped>
 .week-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

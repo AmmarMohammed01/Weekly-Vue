@@ -91,6 +91,7 @@ watch(tasks, () => {
 
 <style scoped>
 .day-box {
+  /* display: inline-block; */
   width: 300px;
   min-height: 400px;
   border-style: solid;
