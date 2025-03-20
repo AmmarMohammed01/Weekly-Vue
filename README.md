@@ -27,3 +27,8 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### For myself: Command to create gh-pages using dist files
+```sh
+git subtree push --prefix dist origin gh-pages
+```
