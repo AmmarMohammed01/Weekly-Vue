@@ -1,7 +1,7 @@
 <script setup>
 import {RouterView} from 'vue-router';
-import { ref } from 'vue';
-import Navbar from './components/Navbar.vue';
+// import { ref } from 'vue';
+// import Navbar from './components/Navbar.vue';
 
 // const weekNum = ref(JSON.parse(localStorage.getItem('weekNum')) || 0);
 // const weeks = ref(JSON.parse(localStorage.getItem('weeks')) || [
@@ -15,8 +15,8 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <div class="css-format">
-    <Navbar />
+  <div> <!--class="css-format"-->
+    <!-- <Navbar /> -->
     <RouterView />
   </div>
   

@@ -59,7 +59,7 @@ watch(tasks, () => {
 
 <template>
   <!-- Task input field -->
-  <div class="w-70 min-h-90 border-none rounded-lg border-2 m-1 shadow-xl bg-orange-400"> <!-- Original CSS: day-box -->
+  <div class="flex-1 min-w-50 xl:max-w-[14vw] min-h-90 border-none rounded-lg border-2 m-1 shadow-xl bg-orange-300 "> <!-- Original CSS: day-box -->
     <form @submit.prevent="addTask">
       <p class="text-2xl text-white text-center font-semibold mt-3 mb-2">{{ dayName }}</p> <!-- Original CSS: day-name -->
       <!-- <label for="newTask">Add Task</label> -->
@@ -70,23 +70,23 @@ watch(tasks, () => {
     </form>
 
     <!-- Display Task: name, edit, check, delete -->
-    <ul class="text-white list-disc pl-6">
+    <ul class="text-black text-sm">
       <li v-for="(task, index) in tasks" :key="task">
         <!-- Task editor view -->
-        <div v-if="editModeIndex == index">
+        <div v-if="editModeIndex == index" class="bg-white px-5 py-3 mx-3 rounded-xl my-2">
           <input type="text" name="editTaskName" id="editTaskName" v-model="editTaskName"
-          class="bg-white text-black rounded-md outline-none">
-          <div class="mt-2">
-            <button @click="editModeSave(index)" class="bg-blue-400 p-1 hover:bg-blue-600 ml-1">Save</button>
-            <button @click="editModeExit()" class="bg-blue-400 p-1 hover:bg-blue-600 ml-1">Cancel</button>
+          class="bg-white text-black rounded-md border outline-none">
+          <div class="mt-2 text-white">
+            <button @click="editModeSave(index)" class="bg-blue-400 px-2 py-1 hover:bg-blue-600 ml-1 rounded-xl">Save</button>
+            <button @click="editModeExit()" class="bg-blue-400 px-2 py-1 hover:bg-blue-600 ml-1 rounded-xl">Cancel</button>
           </div>
         </div>
         <!-- Task normal view -->
-        <div v-else>
-          <div> {{ task.taskName }} </div>
-          <div>
+        <div v-else class="bg-white px-5 py-3 mx-3 rounded-xl my-2">
+          <div class="mb-2"> {{ task.taskName }} </div>
+          <div class="text-white font-semibold">
+            <button @click="completeTask(index)" class="bg-blue-400 w-10 h-7 rounded-4xl hover:bg-emerald-400" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
             <button @click="editModeOpen(index)" class="bg-blue-400 w-10 h-7 ml-1 rounded-4xl hover:bg-amber-400">&#9998;</button>
-            <button @click="completeTask(index)" class="bg-blue-400 w-10 h-7 ml-1 rounded-4xl hover:bg-emerald-400" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
             <button @click="deleteTask(index)"   class="bg-blue-400 w-10 h-7 ml-1 rounded-4xl hover:bg-red-500">x</button>
           </div>
         </div>
