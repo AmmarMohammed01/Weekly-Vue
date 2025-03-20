@@ -1,15 +1,7 @@
 <script setup>
 import DayBox from "./day-box.vue";
 import {ref} from 'vue';
-import { useRoute } from "vue-router";
 
-// const route = useRoute();
-// let currentWeek = route.params.id;
-// console.log(`Current Week: ${currentWeek}`);
-
-//const weeks = ref(JSON.parse(localStorage.getItem('weeks')));
-//const title = ref(weeks[currentWeek].weekName || "Week Box Title Here...");
-// const title = ref(JSON.parse(localStorage.getItem('weeks'))[currentWeek].weekName || "Week Box Title Here...");
 const title = ref(JSON.parse(localStorage.getItem('week-title')) || "Title Here... (Ex. Week 6: Mar. 16-22, 2025)");
 const editTitle = ref("");
 const isModeEdit = ref(false);

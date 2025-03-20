@@ -59,13 +59,13 @@ watch(tasks, () => {
 
 <template>
   <!-- Task input field -->
-  <div class="flex-1 min-w-50 xl:max-w-[14vw] min-h-90 border-none rounded-lg border-2 m-1 shadow-xl bg-orange-300 "> <!-- Original CSS: day-box -->
+  <div class="flex-1 min-w-50 xl:max-w-[14vw] min-h-90 border-none rounded-lg border-2 m-1 shadow-xl bg-linear-310 from-purple-600 to-blue-500 "> <!-- Original CSS: day-box -->
     <form @submit.prevent="addTask">
       <p class="text-2xl text-white text-center font-semibold mt-3 mb-2">{{ dayName }}</p> <!-- Original CSS: day-name -->
       <!-- <label for="newTask">Add Task</label> -->
       <div class="flex justify-center mb-3">
         <input type="text" name="newTask" id="newTask" v-model="newTask" placeholder="Type task here..." class="border-none border-1 rounded-md outline-none p-1 pl-2 text-sm inset-shadow-sm bg-white">
-        <button type="submit" class="bg-emerald-400 hover:bg-emerald-600 text-sm text-white p-1 ml-1 rounded-lg">Add</button>
+        <button type="submit" class="bg-orange-400 hover:bg-orange-600 text-sm text-white p-1 ml-1 rounded-lg">Add</button>
       </div>
     </form>
 
