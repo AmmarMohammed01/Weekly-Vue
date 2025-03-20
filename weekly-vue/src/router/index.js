@@ -9,6 +9,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'DefaultWeekView',
+      component: WeekView,
+    },
+    {
+      path: '/view/:id',
       name: 'WeekView',
       component: WeekView,
     },
