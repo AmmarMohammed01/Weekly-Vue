@@ -59,53 +59,60 @@ watch(tasks, () => {
 
 <template>
   <!-- Task input field -->
-  <div class="day-box">
-  <form @submit.prevent="addTask">
-    <p class="day-name">{{ dayName }}</p>
-    <label for="newTask">Add Task</label>
-    <input type="text" name="newTask" id="newTask" v-model="newTask">
-    <button type="submit">Submit</button>
-  </form>
+  <div class="w-70 min-h-90 border-none rounded-lg border-2 m-1 shadow-xl bg-orange-400"> <!-- Original CSS: day-box -->
+    <form @submit.prevent="addTask">
+      <p class="text-2xl text-white text-center font-semibold mt-3 mb-2">{{ dayName }}</p> <!-- Original CSS: day-name -->
+      <!-- <label for="newTask">Add Task</label> -->
+      <div class="flex justify-center mb-3">
+        <input type="text" name="newTask" id="newTask" v-model="newTask" placeholder="Type task here..." class="border-none border-1 rounded-md outline-none p-1 pl-2 text-sm inset-shadow-sm bg-white">
+        <button type="submit" class="bg-emerald-400 hover:bg-emerald-600 text-sm text-white p-1 ml-1 rounded-lg">Add</button>
+      </div>
+    </form>
 
-  <!-- Display Task: name, edit, check, delete -->
-  <ul>
-    <li v-for="(task, index) in tasks" :key="task">
-      <!-- Task editor view -->
-      <div v-if="editModeIndex == index">
-        <input type="text" name="editTaskName" id="editTaskName" v-model="editTaskName">
-        <button @click="editModeSave(index)">Save</button>
-        <button @click="editModeExit()">Cancel</button>
-      </div>
-      <!-- Task normal view -->
-      <div v-else>
-        <span> {{ task.taskName }} </span>
-        <button @click="editModeOpen(index)">&#9998;</button>
-        <button @click="completeTask(index)" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
-        <button @click="deleteTask(index)">x</button>
-      </div>
-    </li>
-  </ul>
+    <!-- Display Task: name, edit, check, delete -->
+    <ul class="text-white list-disc pl-6">
+      <li v-for="(task, index) in tasks" :key="task">
+        <!-- Task editor view -->
+        <div v-if="editModeIndex == index">
+          <input type="text" name="editTaskName" id="editTaskName" v-model="editTaskName"
+          class="bg-white text-black rounded-md outline-none">
+          <div class="mt-2">
+            <button @click="editModeSave(index)" class="bg-blue-400 p-1 hover:bg-blue-600 ml-1">Save</button>
+            <button @click="editModeExit()" class="bg-blue-400 p-1 hover:bg-blue-600 ml-1">Cancel</button>
+          </div>
+        </div>
+        <!-- Task normal view -->
+        <div v-else>
+          <div> {{ task.taskName }} </div>
+          <div>
+            <button @click="editModeOpen(index)" class="bg-blue-400 w-10 h-7 ml-1 rounded-4xl hover:bg-amber-400">&#9998;</button>
+            <button @click="completeTask(index)" class="bg-blue-400 w-10 h-7 ml-1 rounded-4xl hover:bg-emerald-400" :class="{isTaskComplete: task.taskCompletion}">&check;</button>
+            <button @click="deleteTask(index)"   class="bg-blue-400 w-10 h-7 ml-1 rounded-4xl hover:bg-red-500">x</button>
+          </div>
+        </div>
+      </li>
+    </ul>
 
   </div>
 </template>
 
 <style scoped>
-.day-box {
+/* .day-box { */
   /* display: inline-block; */
-  width: 300px;
-  min-height: 400px;
-  border-style: solid;
-  border-radius: 20px;
-  border-color: black;
-  margin: 10px;
-  font-size: 20px;
-}
+  /* width: 300px; */ 
+  /* min-height: 400px; */
+  /* border-style: solid; */
+  /* border-radius: 20px; */
+  /* border-color: black; */
+  /* margin: 10px; */
+  /* font-size: 20px; */
+/*} */
 
-.day-name {
-  font-size: 30px;
+/* .day-name {
+  font-size: 30px; 
   margin: 10px;
   text-align: center;
-}
+} */
 
 .isTaskComplete {
   background-color: lime;

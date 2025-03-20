@@ -35,14 +35,14 @@ const editModeSave = () => {
 <template>
   <div>
     <!-- title -->
-    <div v-if="isModeEdit == false">
-      <span>{{ title }}</span>
+    <div v-if="isModeEdit == false" class="mt-8 mb-4">
+      <span class="font-bold text-4xl">{{ title }}</span>
       <button @click="editModeOpen()">&#9998;</button>
     </div>
-    <div v-else>
-      <input type="text" v-model="editTitle" name="editTitle" id="editTitle">
-      <button @click="editModeSave()">Save</button>
-      <button @click="editModeClose()">Cancel</button>
+    <div v-else class="text-white mt-8 mb-4">
+      <input type="text" v-model="editTitle" name="editTitle" id="editTitle" class="bg-white text-black rounded-md border border-solid border-black outline-none">
+      <button @click="editModeSave()" class="bg-blue-400 p-1 hover:bg-blue-600 ml-1">Save</button>
+      <button @click="editModeClose()" class="bg-blue-400 p-1 hover:bg-blue-600 ml-1">Cancel</button>
     </div>
     
     <!-- the portion containing day boxes -->
@@ -63,5 +63,6 @@ const editModeSave = () => {
 .week-box {
   display: flex;
   flex-wrap: wrap;
+  row-gap: 10px;
 }
 </style>
